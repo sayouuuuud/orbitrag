@@ -1,0 +1,203 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  ─────────────────────────────────────────────────────────────
+  ORBITRAG.COM — PRIVATE LISTING
+  ─────────────────────────────────────────────────────────────
+  POV:        A Sotheby's catalogue listing for a single AI-era
+              .com domain, sold as a rare asset.
+  DIRECTION:  Obsidian Cinematic — layered near-black surfaces,
+              editorial serif italic moments, one hot orbital
+              accent, generous whitespace.
+  MOOD:       Considered · rare · weightless · confident · warm
+  PALETTE:    Five colors, locked.
+              #0A0A0A  ink      (background)
+              #131313  surface  (cards, layered)
+              #EDE7DA  bone     (primary text, warm off-white)
+              #8A8076  dust     (muted text, warm gray)
+              #FF4D1C  orbital  (single hot accent)
+  TYPE:       Instrument Serif (display, italic for emotion)
+              · Geist (body)
+              · Geist Mono (labels, price, meta — earns its place)
+  GRID:       12 col, 64px gutter on desktop, full-bleed horiz rule
+  RADIUS:     0 — hard edges. No rounded cards. One philosophy.
+  MOTION:     cubic-bezier(0.22, 1, 0.36, 1) · 200/450/800ms
+  TEXTURE:    3% SVG noise overlay, fixed
+  DENSITY:    Editorial-loose. Sections breathe at py-32 → py-48.
+  ─────────────────────────────────────────────────────────────
+*/
+
+:root {
+  /* Obsidian palette */
+  --background: #0a0a0a;
+  --foreground: #ede7da;
+  --surface: #131313;
+  --surface-2: #181818;
+  --muted: #8a8076;
+  --muted-foreground: #8a8076;
+  --border: rgba(237, 231, 218, 0.08);
+  --border-strong: rgba(237, 231, 218, 0.16);
+  --accent: #ff4d1c;
+  --accent-foreground: #0a0a0a;
+
+  /* shadcn compatibility */
+  --card: #131313;
+  --card-foreground: #ede7da;
+  --popover: #131313;
+  --popover-foreground: #ede7da;
+  --primary: #ede7da;
+  --primary-foreground: #0a0a0a;
+  --secondary: #181818;
+  --secondary-foreground: #ede7da;
+  --destructive: #ff4d1c;
+  --destructive-foreground: #ede7da;
+  --input: rgba(237, 231, 218, 0.08);
+  --ring: #ff4d1c;
+  --radius: 0px;
+
+  /* Typography scale */
+  --text-hero: clamp(3rem, 14vw, 14rem);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    border-color: var(--border);
+  }
+  html {
+    background: var(--background);
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "ss01", "cv11", "liga";
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+}
+
+@layer utilities {
+  .font-serif-italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .tracking-label {
+    letter-spacing: 0.22em;
+  }
+  .tracking-display {
+    letter-spacing: -0.04em;
+  }
+  .tracking-hero {
+    letter-spacing: -0.06em;
+  }
+}
+
+/* Signature motion: text rise + fade */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.rise-in {
+  opacity: 0;
+  animation: rise-in 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Orbital rotation */
+@keyframes orbit-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orbit-slow {
+  animation: orbit-rotate 60s linear infinite;
+}
+
+/* Pulse dot */
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2.2s ease-in-out infinite;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in,
+  .orbit-slow,
+  .pulse-dot {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
