@@ -29,13 +29,13 @@ export function Hero({ content }: { content: ContentMap }) {
       <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-12 gap-6 px-6 py-24 md:px-10 md:py-40">
         {/* Left: eyebrow + headline */}
         <div className="col-span-12 lg:col-span-8">
-          <div className="rise-in flex items-center gap-3 font-mono text-[11px] uppercase tracking-label text-muted">
+          <div className="rise-in [animation-delay:0ms] flex items-center gap-3 font-mono text-[11px] uppercase tracking-label text-muted">
             <span className="h-px w-8 bg-border-strong" />
             <span>[ 01 / {content.hero_eyebrow || "Domain acquisition"} ]</span>
           </div>
 
-          <h1 className="rise-in mt-10 font-serif tracking-hero text-foreground leading-[0.88]"
-              style={{ animationDelay: "80ms", fontSize: "var(--text-hero)" }}>
+          <h1 className="rise-in [animation-delay:80ms] mt-10 font-serif tracking-hero text-foreground leading-[0.88]"
+              style={{ fontSize: "var(--text-hero)" }}>
             {name}
             {tld && (
               <>
@@ -45,16 +45,12 @@ export function Hero({ content }: { content: ContentMap }) {
             )}
           </h1>
 
-          <p className="rise-in mt-10 max-w-[52ch] text-pretty text-lg leading-relaxed text-muted md:text-xl"
-             style={{ animationDelay: "160ms" }}>
+          <p className="rise-in [animation-delay:160ms] mt-10 max-w-[52ch] text-pretty text-lg leading-relaxed text-muted md:text-xl">
             {content.hero_subhead}
           </p>
 
           {/* RAG decoding chip */}
-          <div
-            className="rise-in mt-10 inline-flex flex-wrap items-center gap-x-3 gap-y-2 border border-border bg-surface/60 px-4 py-3 font-mono text-[11px] uppercase tracking-label text-muted backdrop-blur-sm"
-            style={{ animationDelay: "200ms" }}
-          >
+          <div className="rise-in [animation-delay:200ms] mt-10 inline-flex flex-wrap items-center gap-x-3 gap-y-2 border border-border bg-surface/60 px-4 py-3 font-mono text-[11px] uppercase tracking-label text-muted backdrop-blur-sm">
             <span className="text-foreground">rag</span>
             <span className="text-border-strong">/</span>
             <span>
@@ -74,8 +70,7 @@ export function Hero({ content }: { content: ContentMap }) {
 
         {/* Right: price card */}
         <aside className="col-span-12 lg:col-span-4 lg:col-start-9">
-          <div className="rise-in border border-border bg-surface/60 p-8 backdrop-blur-sm"
-               style={{ animationDelay: "240ms" }}>
+          <div className="rise-in [animation-delay:240ms] border border-border bg-surface/60 p-8 backdrop-blur-sm">
             <div className="font-mono text-[11px] uppercase tracking-label text-muted">
               Asking price — {currency}
             </div>
