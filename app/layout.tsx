@@ -21,7 +21,7 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
-  title: "orbitrag.com — Premium AI-era domain for sale · $400",
+  title: "orbitrag.com — Premium AI-era domain for sale",
   description:
     "orbitrag.com is a rare, brandable .com built for the retrieval-augmented era. Available now via private listing for $400. Instant transfer.",
   generator: "v0.app",
