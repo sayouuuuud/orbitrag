@@ -1,5 +1,7 @@
 import { ArrowUpRight } from "lucide-react"
 import { OrbitRing } from "./orbit-ring"
+import { ScrollReveal } from "@/components/scroll-reveal"
+import { CountUp } from "@/components/count-up"
 import type { ContentMap } from "@/lib/content"
 import { mailtoFor, normalizeExternalUrl, isExternal } from "@/lib/content"
 
@@ -13,6 +15,7 @@ export function Hero({ content }: { content: ContentMap }) {
   const domain = content.domain_name || "orbitrag.com"
   const [name, tld] = domain.includes(".") ? domain.split(/\.(?=[^.]+$)/) : [domain, ""]
   const { symbol, number } = splitPrice(content.price || "$400")
+  const rawNumber = parseInt(number.replace(/[,.\s]/g, ''), 10) || 400
   const currency = content.price_currency || "USD"
   const primaryUrl = normalizeExternalUrl(content.cta_primary_url || "#acquire")
   const primaryLabel = content.cta_primary_label || "Acquire This Domain"
@@ -29,60 +32,71 @@ export function Hero({ content }: { content: ContentMap }) {
       <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-12 gap-6 px-6 py-24 md:px-10 md:py-40">
         {/* Left: eyebrow + headline */}
         <div className="col-span-12 lg:col-span-8">
-          <div className="rise-in [animation-delay:0ms] flex items-center gap-3 font-mono text-[11px] uppercase tracking-label text-muted">
-            <span className="h-px w-8 bg-border-strong" />
-            <span>[ 01 / {content.hero_eyebrow || "Domain acquisition"} ]</span>
-          </div>
+          <ScrollReveal delay={0}>
+            <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-label text-muted">
+              <span className="h-px w-8 bg-border-strong" />
+              <span>[ 01 / {content.hero_eyebrow || "Domain acquisition"} ]</span>
+            </div>
+          </ScrollReveal>
 
-          <h1 className="rise-in [animation-delay:80ms] mt-10 font-serif tracking-hero text-foreground leading-[0.88]"
-              style={{ fontSize: "var(--text-hero)" }}>
-            {name}
-            {tld && (
-              <>
-                <span className="text-accent">.</span>
-                <span className="font-serif-italic text-muted">{tld}</span>
-              </>
-            )}
-          </h1>
+          <ScrollReveal delay={0.1}>
+            <h1 className="mt-10 font-serif tracking-hero text-foreground leading-[0.88]"
+                style={{ fontSize: "var(--text-hero)" }}>
+              {name}
+              {tld && (
+                <>
+                  <span className="text-accent">.</span>
+                  <span className="font-serif-italic text-muted">{tld}</span>
+                </>
+              )}
+            </h1>
+          </ScrollReveal>
 
-          <p className="rise-in [animation-delay:160ms] mt-10 max-w-[52ch] text-pretty text-lg leading-relaxed text-muted md:text-xl">
-            {content.hero_subhead}
-          </p>
+          <ScrollReveal delay={0.2}>
+            <p className="mt-10 max-w-[52ch] text-pretty text-lg leading-relaxed text-muted md:text-xl">
+              {content.hero_subhead}
+            </p>
+          </ScrollReveal>
 
           {/* RAG decoding chip */}
-          <div className="rise-in [animation-delay:200ms] mt-10 inline-flex flex-wrap items-center gap-x-3 gap-y-2 border border-border bg-surface/60 px-4 py-3 font-mono text-[11px] uppercase tracking-label text-muted backdrop-blur-sm">
-            <span className="text-foreground">rag</span>
-            <span className="text-border-strong">/</span>
-            <span>
-              <span className="text-foreground">r</span>etrieval
-            </span>
-            <span className="text-border-strong">·</span>
-            <span>
-              <span className="text-foreground">a</span>ugmented
-            </span>
-            <span className="text-border-strong">·</span>
-            <span>
-              <span className="text-foreground">g</span>eneration
-            </span>
-            <span className="ml-1 inline-block h-2 w-2 bg-accent pulse-dot" />
-          </div>
+          <ScrollReveal delay={0.3}>
+            <div className="mt-10 inline-flex flex-wrap items-center gap-x-3 gap-y-2 border border-border bg-surface/60 px-4 py-3 font-mono text-[11px] uppercase tracking-label text-muted backdrop-blur-sm">
+              <span className="text-foreground">rag</span>
+              <span className="text-border-strong">/</span>
+              <span>
+                <span className="text-foreground">r</span>etrieval
+              </span>
+              <span className="text-border-strong">·</span>
+              <span>
+                <span className="text-foreground">a</span>ugmented
+              </span>
+              <span className="text-border-strong">·</span>
+              <span>
+                <span className="text-foreground">g</span>eneration
+              </span>
+              <span className="ml-1 inline-block h-2 w-2 bg-accent pulse-dot" />
+            </div>
+          </ScrollReveal>
         </div>
 
         {/* Right: price card */}
         <aside className="col-span-12 lg:col-span-4 lg:col-start-9">
-          <div className="rise-in [animation-delay:240ms] border border-border bg-surface/60 p-8 backdrop-blur-sm">
-            <div className="font-mono text-[11px] uppercase tracking-label text-muted">
-              Asking price — {currency}
-            </div>
+          <ScrollReveal delay={0.4}>
+            <div className="border border-border bg-surface/60 p-8 backdrop-blur-sm">
+              <div className="font-mono text-[11px] uppercase tracking-label text-muted">
+                Asking price — {currency}
+              </div>
 
-            <div className="mt-6 flex items-baseline gap-2">
-              <span className="font-mono text-[11px] uppercase tracking-label text-muted">
-                {symbol}
-              </span>
-              <span className="font-mono text-6xl font-normal tabular-nums tracking-tight text-foreground md:text-7xl">
-                {number}
-              </span>
-            </div>
+              <div className="mt-6 flex items-baseline gap-2">
+                <span className="font-mono text-[11px] uppercase tracking-label text-muted">
+                  {symbol}
+                </span>
+                <CountUp 
+                  to={rawNumber} 
+                  duration={2.5} 
+                  className="font-mono text-6xl font-normal tabular-nums tracking-tight text-foreground md:text-7xl"
+                />
+              </div>
 
             <div className="mt-2 font-mono text-[11px] uppercase tracking-label text-muted">
               One-time · Instant transfer
@@ -111,17 +125,18 @@ export function Hero({ content }: { content: ContentMap }) {
               <span className="text-muted">→</span>
             </a>
 
-            <div className="mt-6 grid grid-cols-2 gap-4 border-t border-border pt-6 font-mono text-[11px] uppercase tracking-label">
-              <div>
-                <div className="text-muted">Escrow</div>
-                <div className="mt-1 text-foreground">Dan.com / Escrow.com</div>
-              </div>
-              <div>
-                <div className="text-muted">Transfer</div>
-                <div className="mt-1 text-foreground">{"< 24h"}</div>
+              <div className="mt-6 grid grid-cols-2 gap-4 border-t border-border pt-6 font-mono text-[11px] uppercase tracking-label">
+                <div>
+                  <div className="text-muted">Escrow</div>
+                  <div className="mt-1 text-foreground">Dan.com / Escrow.com</div>
+                </div>
+                <div>
+                  <div className="text-muted">Transfer</div>
+                  <div className="mt-1 text-foreground">{"< 24h"}</div>
+                </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </aside>
       </div>
 
