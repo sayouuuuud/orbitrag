@@ -193,11 +193,4 @@
   will-change: transform;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .rise-in,
-  .orbit-slow,
-  .pulse-dot {
-    animation: none !important;
-    opacity: 1 !important;
-  }
-}
+

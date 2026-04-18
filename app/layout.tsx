@@ -42,9 +42,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geist.variable} ${geistMono.variable} ${instrumentSerif.variable} bg-background`}
     >
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         {children}
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>

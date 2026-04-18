@@ -21,7 +21,7 @@ export function ScrollReveal({ children, delay = 0, direction = "up" }: ScrollRe
     <motion.div
       initial={{ opacity: 0, ...directions[direction] }}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
+      viewport={{ once: true, amount: "some" }}
       transition={{
         duration: 0.8,
         delay: delay,
