@@ -9,6 +9,7 @@ import { Acquire } from "@/components/orbitrag/acquire"
 import { Footer } from "@/components/orbitrag/footer"
 import { TrackVisit } from "@/components/track-visit"
 import { getContent } from "@/lib/content"
+import { ScrollReveal } from "@/components/scroll-reveal"
 
 export const dynamic = "force-dynamic"
 
@@ -18,20 +19,36 @@ export default async function Page() {
     <main className="relative min-h-dvh bg-background text-foreground">
       <TrackVisit />
       <Grain />
-      <div className="rise-in">
+      
+      <ScrollReveal>
         <Nav content={content} />
-      </div>
+      </ScrollReveal>
+      
       <Hero content={content} />
-      <div className="rise-in" style={{ animationDelay: "320ms" }}>
+      
+      <ScrollReveal delay={0.2}>
         <Marquee content={content} />
-      </div>
-      <div className="rise-in" style={{ animationDelay: "400ms" }}>
+      </ScrollReveal>
+      
+      <ScrollReveal delay={0.1}>
         <Specs content={content} />
+      </ScrollReveal>
+      
+      <ScrollReveal delay={0.1}>
         <Thesis content={content} />
+      </ScrollReveal>
+      
+      <ScrollReveal delay={0.1}>
         <UseCases />
+      </ScrollReveal>
+      
+      <ScrollReveal delay={0.1}>
         <Acquire content={content} />
+      </ScrollReveal>
+      
+      <ScrollReveal delay={0.1}>
         <Footer content={content} />
-      </div>
+      </ScrollReveal>
     </main>
   )
 }
