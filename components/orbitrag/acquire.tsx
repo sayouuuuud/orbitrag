@@ -10,7 +10,7 @@ function splitPrice(raw: string) {
 
 export function Acquire({ content }: { content: ContentMap }) {
   const domain = content.domain_name || "orbitrag.com"
-  const { symbol, number } = splitPrice(content.price || "$400")
+  const { symbol, number } = splitPrice(content.price || "$1,000")
   const currency = content.price_currency || "USD"
   const primaryUrl = normalizeExternalUrl(content.cta_primary_url || "#acquire")
   const primaryLabel = content.cta_primary_label || "Acquire This Domain"

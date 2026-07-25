@@ -4,7 +4,7 @@ export function Footer({ content }: { content: ContentMap }) {
   const domain = content.domain_name || "orbitrag.com"
   const [name, tld] = domain.includes(".") ? domain.split(/\.(?=[^.]+$)/) : [domain, ""]
   const ownerEmail = content.owner_email || "owner@orbitrag.com"
-  const price = content.price || "$400"
+  const price = content.price || "$1,000"
 
   return (
     <footer className="relative overflow-hidden bg-background">

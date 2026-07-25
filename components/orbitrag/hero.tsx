@@ -14,8 +14,8 @@ function splitPrice(raw: string) {
 export function Hero({ content }: { content: ContentMap }) {
   const domain = content.domain_name || "orbitrag.com"
   const [name, tld] = domain.includes(".") ? domain.split(/\.(?=[^.]+$)/) : [domain, ""]
-  const { symbol, number } = splitPrice(content.price || "$400")
-  const rawNumber = parseInt(number.replace(/[,.\s]/g, ''), 10) || 400
+  const { symbol, number } = splitPrice(content.price || "$1,000")
+  const rawNumber = parseInt(number.replace(/[,.\s]/g, ''), 10) || 1000
   const currency = content.price_currency || "USD"
   const primaryUrl = normalizeExternalUrl(content.cta_primary_url || "#acquire")
   const primaryLabel = content.cta_primary_label || "Acquire This Domain"
