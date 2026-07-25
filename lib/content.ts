@@ -1,10 +1,12 @@
-import { createClient } from "@/lib/supabase/server"
-
 export type ContentMap = Record<string, string>
 
-export const DEFAULT_CONTENT: ContentMap = {
+/**
+ * All site copy lives here as static content — no database, no external
+ * services. Edit these values directly to update the landing page.
+ */
+export const CONTENT: ContentMap = {
   domain_name: "orbitrag.com",
-  price: "$400",
+  price: "$1,000",
   price_currency: "USD",
   hero_eyebrow: "Private listing · 2026",
   hero_headline: "A name for the retrieval era.",
@@ -21,25 +23,11 @@ export const DEFAULT_CONTENT: ContentMap = {
     "Eight characters|.com extension|AI / RAG-native|Brandable|Three syllables|No hyphens|Instant transfer|Escrow available",
 }
 
-/**
- * Fetches the site content from Supabase.
- *
- * This function is called on every request to the landing page, which means
- * every visit is itself a database read and resets Supabase's idle-pause
- * timer. No external cron / GitHub Action / script is needed — the site
- * keeps itself alive just by being live.
- */
-export async function getContent(): Promise<ContentMap> {
-  try {
-    const supabase = await createClient()
-    const { data, error } = await supabase.from("site_content").select("key,value")
-    if (error || !data) return { ...DEFAULT_CONTENT }
-    const map: ContentMap = { ...DEFAULT_CONTENT }
-    for (const row of data) map[row.key] = row.value
-    return map
-  } catch {
-    return { ...DEFAULT_CONTENT }
-  }
+/** Kept for backwards compatibility with existing imports. */
+export const DEFAULT_CONTENT = CONTENT
+
+export function getContent(): ContentMap {
+  return { ...CONTENT }
 }
 
 export function mailtoFor(email: string, domain: string) {
